@@ -144,9 +144,8 @@ int main() {
                     for(vector<State>::iterator it1 = openset.begin(); it1 != openset.end(); ++it1) {
                         if(*it1 == *it) {
 
-                            //计算这一次的评估值，注意，动作对象是subStateOfCurrent里的新扩展出来的对象
-                            int newEvaluation = it->evaluate();
-                            if(newEvaluation < it1->f) {
+                            
+                            if(it->f < it1->f) {
                                 it1->f = newEvaluation;//更新open表里该节点的评估值
                             }
                             break;
@@ -157,8 +156,8 @@ int main() {
 
                     for(vector<State>::iterator it1 = closeset.begin(); it1 != closeset.end(); ++it1) {
                         if(*it1 == *it) {
-                            int newEvaluation = it->evaluate();
-                            if(newEvaluation < it1->f) {
+                           
+                            if(it->f < it1->f) {
 
                                 //加到open表里，并从close中删除
                                 openset.push_back(*it);
@@ -180,7 +179,7 @@ int main() {
             //清空这次到subStateOfCurrent表
 
             subStateOfCurrent.clear();
-            
+
             current.f = current.evaluate();
             closeset.push_back(current);
 
